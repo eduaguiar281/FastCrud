@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FastCrud.Models.Alunos>
+﻿@model FastCrud.Models.AlunosViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -7,6 +7,14 @@
 
 <h1>Index</h1>
 
+<h2>
+    Aluno TempData - @ViewData["TempDataQueVemDoEdit"]
+</h2>
+
+<h2>
+    Aluno ViewData - @ViewData["ViewDataQueVemDoEdit"]
+</h2>
+
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -14,53 +22,54 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nome)
+                @Html.DisplayNameFor(model => model.Alunos.FirstOrDefault().Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.Alunos.FirstOrDefault().Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DataNascimento)
+                @Html.DisplayNameFor(model => model.Alunos.FirstOrDefault().DataNascimento)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DataCadastro)
+                @Html.DisplayNameFor(model => model.Alunos.FirstOrDefault().DataCadastro)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Matricula)
+                @Html.DisplayNameFor(model => model.Alunos.FirstOrDefault().Matricula)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ativo)
+                @Html.DisplayNameFor(model => model.Alunos.FirstOrDefault().Ativo)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataNascimento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataCadastro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Matricula)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ativo)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Alunos)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataNascimento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataCadastro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Matricula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ativo)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

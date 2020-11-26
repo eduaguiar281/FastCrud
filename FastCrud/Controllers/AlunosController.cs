@@ -21,7 +21,12 @@ namespace FastCrud.Controllers
         // GET: Alunos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Alunos.ToListAsync());
+            var model = new AlunosViewModel(await _context.Alunos.ToListAsync());
+            if ((TempData["UltimoAluno"] != null))
+                ViewData["TempDataQueVemDoEdit"] = TempData["UltimoAluno"];
+            if (ViewData["UltimoAluno"] != null)
+                ViewData["ViewDataQueVemDoEdit"] = ViewData["UltimoAluno"];
+            return View(model);
         }
 
         // GET: Alunos/Details/5
@@ -110,6 +115,8 @@ namespace FastCrud.Controllers
                         throw;
                     }
                 }
+                TempData["UltimoAluno"] = $"{alunos.Id}- {alunos.Nome}";
+                ViewData["UltimoAluno"] = $"{alunos.Id}- {alunos.Nome}";
                 return RedirectToAction(nameof(Index));
             }
             return View(alunos);
